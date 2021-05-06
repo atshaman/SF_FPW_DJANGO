@@ -12,9 +12,9 @@ class Author(models.Model):
             [i['rating'] * 3 for i in Post.objects.filter(author=self, posttype='ST').values('rating')])
         self.rating += sum([i['rating'] for i in Comment.objects.filter(user=self.user).values('rating')])
         self.rating += sum(i['rating'] for i in
-            [Comment.objects.filter(post=i).values('rating') for i in Post.objects.filter(author=self)][0])
+                           [Comment.objects.filter(post=i).values('rating') for i in Post.objects.filter(author=self)][
+                               0])
         return self.rating
-
 
 
 class Post(models.Model):
@@ -39,6 +39,9 @@ class Post(models.Model):
 
     def __str__(self):
         return f'{self.title}: {self.preview()}'
+
+    def get_absolute_url(self):
+        return f'/news/{self.id}'
 
 
 class Category(models.Model):

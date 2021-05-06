@@ -8,4 +8,7 @@
     <h1>{{ post.text|censor }}</h1>
     <h1>{{ post.rating }}</h1>
     <h1>{{ post.created_at|date:'d-M-Y G:i' }}</h1>
+<form method="POST">
+    {% csrf_token %}
+    <input type="submit" value="подтвердить"></form>
 {% endblock content %}
